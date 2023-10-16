@@ -430,8 +430,9 @@ did4 <- lm(Share ~ KP*Post + Incumbent + Unopposed + Competitors, data = didata)
 did5 <- lm(Share ~ KP*Post + Incumbent + Unopposed + Competitors + factor(Party), data = didata)
 did6 <- lm(Share ~ KP*Post + Incumbent + Unopposed + Competitors + factor(Party) + factor(State), data = didata)
 did7 <- lm(Share ~ KP*Post + Incumbent + Unopposed + Competitors + factor(Party) + factor(State) + factor(ID), data = didata)
+did8 <- lm(Share ~ KP*Post*factor(Party) + Incumbent + Unopposed + Competitors + factor(State) + factor(ID), data = didata)
 
-stargazer(did1, did2, did3, did4, did5, did6, did7, type = 'text', omit = c('State', 'ID'), omit.stat = c('f', 'ser'))
+stargazer(did1, did2, did3, did4, did5, did6, did7, did8, type = 'text', omit = c('State', 'ID'), omit.stat = c('f', 'ser'))
 
 xdid1 <- coeftest(did1, vcov. = vcovCL(did1, type = 'HC0'))
 xdid2 <- coeftest(did2, vcov. = vcovCL(did2, type = 'HC0'))
@@ -440,8 +441,9 @@ xdid4 <- coeftest(did4, vcov. = vcovCL(did4, type = 'HC0'))
 xdid5 <- coeftest(did5, vcov. = vcovCL(did5, type = 'HC0'))
 xdid6 <- coeftest(did6, vcov. = vcovCL(did6, type = 'HC0'))
 xdid7 <- coeftest(did7, vcov. = vcovCL(did7, type = 'HC0'))
+xdid8 <- coeftest(did8, vcov. = vcovCL(did8, type = 'HC0'))
 
-stargazer(xdid1, xdid2, xdid3, xdid4, xdid5, xdid6, xdid7, type = 'text', omit = c('State', 'ID'), omit.stat = c('f', 'ser'))
+stargazer(xdid1, xdid2, xdid3, xdid4, xdid5, xdid6, xdid7, xdid8, type = 'text', omit = c('State', 'ID'), omit.stat = c('f', 'ser'))
 
 # New data
 
@@ -587,8 +589,9 @@ ddid4 <- lm(Share ~ KP*Post + Incumbent + Unopposed + Competitors, data = didata
 ddid5 <- lm(Share ~ KP*Post + Incumbent + Unopposed + Competitors + factor(Party), data = didata55)
 ddid6 <- lm(Share ~ KP*Post + Incumbent + Unopposed + Competitors + factor(Party) + factor(State), data = didata55)
 ddid7 <- lm(Share ~ KP*Post + Incumbent + Unopposed + Competitors + factor(Party) + factor(State) + factor(ID), data = didata55)
+ddid8 <- lm(Share ~ KP*Post*factor(Party) + Incumbent + Unopposed + Competitors + factor(State) + factor(ID), data = didata55)
 
-stargazer(ddid1, ddid2, ddid3, ddid4, ddid5, ddid6, ddid7, type = 'text', omit = c('State', 'ID'), omit.stat = c('f', 'ser'))
+stargazer(ddid1, ddid2, ddid3, ddid4, ddid5, ddid6, ddid7, ddid8, type = 'text', omit = c('State', 'ID'), omit.stat = c('f', 'ser'))
 
 xddid1 <- coeftest(ddid1, vcov. = vcovCL(ddid1, type = 'HC0'))
 xddid2 <- coeftest(ddid2, vcov. = vcovCL(ddid2, type = 'HC0'))
@@ -597,8 +600,9 @@ xddid4 <- coeftest(ddid4, vcov. = vcovCL(ddid4, type = 'HC0'))
 xddid5 <- coeftest(ddid5, vcov. = vcovCL(ddid5, type = 'HC0'))
 xddid6 <- coeftest(ddid6, vcov. = vcovCL(ddid6, type = 'HC0'))
 xddid7 <- coeftest(ddid7, vcov. = vcovCL(ddid7, type = 'HC0'))
+xddid8 <- coeftest(ddid8, vcov. = vcovCL(ddid8, type = 'HC0'))
 
-stargazer(xddid1, xddid2, xddid3, xddid4, xddid5, xddid6, xddid7, type = 'text', omit = c('State', 'ID'), omit.stat = c('f', 'ser'))
+stargazer(xddid1, xddid2, xddid3, xddid4, xddid5, xddid6, xddid7, xddid8, type = 'text', omit = c('State', 'ID'), omit.stat = c('f', 'ser'))
 
 # Reading in the district geographies
 
@@ -825,15 +829,15 @@ write.csv(stargazer(xgkip1, xgkip2, xgkip3, xgkip4, omit = c('State'), omit.stat
 write.csv(stargazer(gkkip1, gkkip2, gkkip3, gkkip4, omit = c('State'), omit.stat = c('ser')), paste0(direc, 'results/kip55_glm.txt'), row.names = FALSE)
 write.csv(stargazer(xgkkip1, xgkkip2, xgkkip3, xgkkip4, omit = c('State'), omit.stat = c('ser')), paste0(direc, 'results/kip55_r_glm.txt'), row.names = FALSE)
 
-write.csv(stargazer(did1, did2, did3, did4, did5, did6, did7, type = 'text', omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did_text.txt'), row.names = FALSE)
-write.csv(stargazer(xdid1, xdid2, xdid3, xdid4, xdid5, xdid6, xdid7, type = 'text', omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did_r_text.txt'), row.names = FALSE)
-write.csv(stargazer(ddid1, ddid2, ddid3, ddid4, ddid5, ddid6, ddid7, type = 'text', omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did55_text.txt'), row.names = FALSE)
-write.csv(stargazer(xddid1, xddid2, xddid3, xddid4, xddid5, xddid6, xddid7, type = 'text', omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did55_r_text.txt'), row.names = FALSE)
+write.csv(stargazer(did1, did2, did3, did4, did5, did6, did7, did8, type = 'text', omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did_text.txt'), row.names = FALSE)
+write.csv(stargazer(xdid1, xdid2, xdid3, xdid4, xdid5, xdid6, xdid7, xdid8, type = 'text', omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did_r_text.txt'), row.names = FALSE)
+write.csv(stargazer(ddid1, ddid2, ddid3, ddid4, ddid5, ddid6, ddid7, ddid8, type = 'text', omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did55_text.txt'), row.names = FALSE)
+write.csv(stargazer(xddid1, xddid2, xddid3, xddid4, xddid5, xddid6, xddid7, xddid8, type = 'text', omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did55_r_text.txt'), row.names = FALSE)
 
-write.csv(stargazer(did1, did2, did3, did4, did5, did6, did7, omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did.txt'), row.names = FALSE)
-write.csv(stargazer(xdid1, xdid2, xdid3, xdid4, xdid5, xdid6, xdid7, omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did_r.txt'), row.names = FALSE)
-write.csv(stargazer(ddid1, ddid2, ddid3, ddid4, ddid5, ddid6, ddid7, omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did55.txt'), row.names = FALSE)
-write.csv(stargazer(xddid1, xddid2, xddid3, xddid4, xddid5, xddid6, xddid7, omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did55_r.txt'), row.names = FALSE)
+write.csv(stargazer(did1, did2, did3, did4, did5, did6, did7, did8, omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did.txt'), row.names = FALSE)
+write.csv(stargazer(xdid1, xdid2, xdid3, xdid4, xdid5, xdid6, xdid7, xdid8, omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did_r.txt'), row.names = FALSE)
+write.csv(stargazer(ddid1, ddid2, ddid3, ddid4, ddid5, ddid6, ddid7, ddid8, omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did55.txt'), row.names = FALSE)
+write.csv(stargazer(xddid1, xddid2, xddid3, xddid4, xddid5, xddid6, xddid7, xddid8, omit = c('State', 'ID'), omit.stat = c('ser')), paste0(direc, 'results/did55_r.txt'), row.names = FALSE)
 
 
 
